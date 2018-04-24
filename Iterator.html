@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+//生成器
+        function *test(){
+            yield(console.log(1));
+            yield(console.log(2));
+            yield(console.log(3));
+        }
+        let iter = test();
+        iter.next();
+        iter.next();
+        iter.next();
+
+//迭代器
+        function createInteroer(arr){
+            var i = 0;
+            return {
+                next:function(){
+                    let done = (i>=arr.length);
+                    let value = !done ? arr[i++] : undefined;
+                    return {
+                        done : done,
+                        value : value
+                    }
+                }
+            }
+        }
+        let interor = new createInteroer(['a','b','c']);
+        console.log(interor.next());
+        console.log(interor.next());
+        console.log(interor.next());
+        console.log(interor.next());
+    </script>
+</body>
+</html>
